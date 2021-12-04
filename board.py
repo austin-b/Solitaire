@@ -38,8 +38,12 @@ class Board:
         if len(row) > 0:
             row[-1].hidden = False
 
+    def validate_move(self, moving_card, dest_card):
+        pass
+
     def move_card(self, start, dest):
         if len(start) > 0:
+            #if self.validate_move(start[-1], dest[-1]):
             dest.append(start[-1])
             self.reveal_next(start)
 
@@ -56,7 +60,7 @@ class Board:
             if c.hidden:
                 hidden += 1
             else:
-                temp_string += str(c)
+                temp_string += str(c) + " "
         return "Hidden: " + str(hidden) + " Revealed: " + temp_string
 
     def show_board(self):
