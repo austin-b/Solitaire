@@ -1,3 +1,5 @@
+from random import shuffle
+
 class Value:
 
     value_range = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
@@ -28,7 +30,6 @@ class Value:
         else:
             return self.value == other.value
         
-
 class Card:
 
     def __init__(self, color, suit, value, image="", hidden=True, screen_location=None):
@@ -40,7 +41,7 @@ class Card:
         self.screen_location = screen_location
 
     def __repr__(self):
-        return "Card(" + self.suit + ", " + str(self.value) + ")"
+        return "Card(" + self.color + ", " + self.suit + ", " + str(self.value) + ")"
 
 class Deck:
 
@@ -55,8 +56,16 @@ class Deck:
                     color = "black"
                 self.cards.append(Card(color,s,Value(v)))
 
+    def shuffle(self):
+        shuffle(self.cards)
+
+    def draw(self):
+        return self.cards.pop(0)
+
 if __name__ == '__main__':                
     deck = Deck()
+
+    deck.shuffle()
 
     for c in deck.cards:
         print(c)
