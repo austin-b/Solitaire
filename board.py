@@ -26,26 +26,49 @@ class Board:
         for i in range(7):
             temp_list = []
             for j in range(i+1):
-                temp_list.append(deck.draw())
+                card = deck.draw()
+                card.location = i
+                temp_list.append(card)
             self.rows.append(temp_list)
 
         for r in self.rows:
             r[-1].hidden = False
 
-        self.spare_hidden = deck.cards
+        for c in deck.cards:
+            c.location = "spare_hidden"
+            self.spare_hidden.append(c)
 
-    def reveal_next(self, row):
-        if len(row) > 0:
-            row[-1].hidden = False
+    def check_rows_for_reveal(self):
+        for row in self.rows:
+            if len(row) > 0:
+                row[-1].hidden = False
+
+    def validate_playing_row_move(self, moving_card, dest_card):
+        if moving_card.color != dest_card.color:
+            if dest_card.value == (moving_card.value + 1):
+                return True
+            else: return False
+        else: return False
 
     def validate_move(self, moving_card, dest_card):
-        pass
+        # playing row to playing row
+        if 0 <= moving_card.location <= 6:
+            return self.validate_playing_row_move(moving_card, dest_card)
 
-    def move_card(self, start, dest):
-        if len(start) > 0:
-            #if self.validate_move(start[-1], dest[-1]):
-            dest.append(start[-1])
-            self.reveal_next(start)
+        # playing row to completed
+
+        # spare_hidden to spare_shown
+
+
+    # change location of moved card
+    def move_card(self, card, dest):
+        if self.validate_move(card, dest[-1]):
+            dest.append(card)
+            self.check_rows_for_reveal()
+
+    # TODO
+    def check_win(self):
+        pass
 
     def print_single_show_row(self, row):
         if len(row) > 0:

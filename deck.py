@@ -32,16 +32,16 @@ class Value:
         
 class Card:
 
-    def __init__(self, color, suit, value, image="", hidden=True, screen_location=None):
+    def __init__(self, color, suit, value, image="", hidden=True, location=None):
         self.color = color
         self.suit = suit
         self.value = Value(value)
         self.image = image
         self.hidden = hidden
-        self.screen_location = screen_location
+        self.location = location
 
     def __repr__(self):
-        return "Card(" + self.color + ", " + self.suit + ", " + str(self.value) + ")"
+        return "Card(" + self.color + ", " + self.suit + ", " + str(self.value) + ", location: " + str(self.location) + ")"
 
 class Deck:
 
