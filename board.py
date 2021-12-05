@@ -43,6 +43,19 @@ class Board:
             if len(row) > 0:
                 row[-1].hidden = False
 
+    def find_card(self, card):
+        if 0 <= card.location <= 6: 
+            return self.rows[card.location]
+        else: 
+            return eval(card.location) # if not a number, all locations are just the name of the row
+
+    def remove_card_from_current_row(self, card):
+        current_row = self.find_card(card)
+        current_row.remove(card)
+
+    def change_card_location(self, card, location):
+        pass
+
     def validate_playing_row_move(self, moving_card, dest_card):
         if moving_card.color != dest_card.color:
             if dest_card.value == (moving_card.value + 1):
@@ -63,6 +76,8 @@ class Board:
         if self.validate_move(card, dest[-1]):
             # TODO: have to find card to remove from card start location
             # TODO: change location of moved card
+            self.remove_card_from_current_row(card)
+            self.change_card_location(card, dest)
             dest.append(card)
             self.check_rows_for_reveal()
 
