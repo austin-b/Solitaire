@@ -63,6 +63,7 @@ class Board:
     # change location of moved card
     def move_card(self, card, dest):
         if self.validate_move(card, dest[-1]):
+            # TODO: have to find card to remove from card start location
             dest.append(card)
             self.check_rows_for_reveal()
 
