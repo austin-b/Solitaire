@@ -33,12 +33,22 @@ class Value:
 class Card:
 
     def __init__(self, color, suit, value, image="", hidden=True, location=None):
-        self.color = color
-        self.suit = suit
+        self.color = self.sanitize_color(color)
+        self.suit = self.sanitize_suit(suit)
         self.value = Value(value)
         self.image = image
         self.hidden = hidden
         self.location = location
+
+    def sanitize_color(self, color):
+        if color.lower() == "black" or color.lower() == "red":
+            return color.lower()
+        else: raise ValueError("Invalid color: black or red only")
+    
+    def sanitize_suit(self, suit):
+        if suit.capitalize() == "Diamonds" or suit.capitalize() == "Hearts" or suit.capitalize() == "Spades" or suit.capitalize() == "Clubs":
+            return suit.capitalize()
+        else: raise ValueError("Suit can only be Diamonds, Hearts, Spades, or Clubs.")
 
     def __repr__(self):
         return "Card(" + self.color + ", " + self.suit + ", " + str(self.value) + ", location: " + str(self.location) + ")"

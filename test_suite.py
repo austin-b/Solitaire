@@ -35,7 +35,14 @@ class TestValue(unittest.TestCase):
         self.assertFalse(Value('K') == 'k')
         self.assertFalse(self.test_value == Value(7))
 
+class TestCard(unittest.TestCase):
+    def setUp(self):
+        self.test_card = Card("black", "Spades", 'Q')
 
+    def test_card_string(self):
+        self.assertEqual(str(self.test_card), "Card(black, Spades, Q, location: None)")
+
+    
 
 if __name__ == '__main__':
     unittest.main(verbosity=3)
