@@ -30,6 +30,8 @@ class Value:
         else:
             return self.value == other.value
         
+# TODO: make a variation on Card whose value range is /
+# continuous; i.e., K + 1 == A and A - 1 == K
 class Card:
 
     def __init__(self, color, suit, value, image="", hidden=True, location=None):

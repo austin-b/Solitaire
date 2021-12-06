@@ -18,6 +18,10 @@ class Board:
     # rows
     rows = []
 
+    # TODO: make a dictionary of names and all row variables /
+    # to have an easy lookup between the Card's location property /
+    # and lists, without any risky evals
+    
     def __init__(self):
         deck = Deck()
 
