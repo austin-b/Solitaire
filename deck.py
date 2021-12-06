@@ -91,9 +91,7 @@ class Deck:
         return self.cards.pop(0)
 
 if __name__ == '__main__':                
-    deck = Deck()
+    from test_suite import TestValue, TestCard, TestDeck
+    import unittest
 
-    deck.shuffle()
-
-    for c in deck.cards:
-        print(c)
+    unittest.main(verbosity=3)

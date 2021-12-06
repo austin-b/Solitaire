@@ -21,7 +21,7 @@ class Board:
     # TODO: make a dictionary of names and all row variables /
     # to have an easy lookup between the Card's location property /
     # and lists, without any risky evals
-    
+
     def __init__(self):
         deck = Deck()
 
@@ -127,23 +127,9 @@ class Board:
         print("Row 6 -- " + self.print_play_row(self.rows[5]))
         print("Row 7 -- " + self.print_play_row(self.rows[6]))
 
-    
-def board_test():
-    board = Board()
-
-    board.show_board()
-        
-def test():
-    deck = Deck()
-
-    print(len(deck.cards))
-
-    deck.shuffle()
-
-    for c in deck.cards:
-        print(c)
-
-    print(len(deck.cards))
-
+ 
 if __name__ == "__main__":
-    board_test()
+    from test_suite import TestBoard
+    import unittest
+
+    unittest.main(verbosity=3)
