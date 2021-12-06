@@ -1,5 +1,6 @@
 import unittest
 from deck import *
+from board import Board
 
 class TestValue(unittest.TestCase):
 
@@ -87,6 +88,52 @@ class TestDeck(unittest.TestCase):
     def test_deck_draw(self):
         test_pop = self.test_deck.draw()
         self.assertFalse(test_pop in self.test_deck.cards)
+
+class TestBoard(unittest.TestCase):
+
+    def setUp(self):
+        self.board = Board()
+
+    def test_initial_board_layout(self):
+        self.assertEqual(len(self.board.rows[0]), 1)
+        self.assertEqual(len(self.board.rows[1]), 2)
+        self.assertEqual(len(self.board.rows[2]), 3)
+        self.assertEqual(len(self.board.rows[3]), 4)
+        self.assertEqual(len(self.board.rows[4]), 5)
+        self.assertEqual(len(self.board.rows[5]), 6)
+        self.assertEqual(len(self.board.rows[6]), 7)
+
+        self.assertEqual(len(self.board.spare_hidden), 24)
+
+        # ensure only last card in row is unhidden
+        for r in self.board.rows:
+            for c in r:
+                if c == r[-1]:
+                    self.assertFalse(c.hidden)
+                else:
+                    self.assertTrue(c.hidden)
+
+    # TODO: will need to know the 'mock' sublibrary
+    def test_move_card_from_playing_row_to_playing_row(self):
+        pass
+
+    def test_move_card_from_playing_row_to_completed_row(self):
+        pass
+
+    def test_move_bundle_of_cards(self):
+        pass
+
+    def test_move_spare_hidden_to_shown(self):
+        pass
+
+    def test_move_spare_shown_to_playing_row(self):
+        pass
+
+    def test_move_spare_shown_to_completed_row(self):
+        pass
+
+    def test_validate_win_condition(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main(verbosity=3)
