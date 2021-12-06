@@ -1,14 +1,22 @@
 from random import shuffle
 
 class Value:
+    """Represents the range of values a card can have, from A to K.
+    Can add or subtract to return a new value inside of range, as well as test for equality with either a character or an integer.
 
+    Range of values: ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
+
+    Raises:
+        ValueError: raised when value passed is outside of range
+        IndexError: raised when attempt is made to add or subtract outside of possible range
+    """
     value_range = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
 
     def __init__(self, value):
         if value in self.value_range:
             self.value = value
         else:
-            raise ValueError
+            raise ValueError("can only be one of these values: " + str(self.value_range))
 
     def __repr__(self):
         return str(self.value)
@@ -43,7 +51,8 @@ class ValueContinuous(Value):
         return super().__sub__(remainder)
 
 class Card:
-
+    """[summary]
+    """    
     def __init__(self, color, suit, value, image="", hidden=True, location=None):
         self.color = self.sanitize_color(color)
         self.suit = self.sanitize_suit(suit)
@@ -83,7 +92,8 @@ class Card:
         else: return False
 
 class Deck:
-
+    """[summary]
+    """
     def __init__(self, continuous=False):
         self.cards = []
         for s in ["Diamonds", "Spades", "Hearts", "Clubs"]:
