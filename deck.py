@@ -29,9 +29,19 @@ class Value:
             return self.value == other
         else:
             return self.value == other.value
-        
-# TODO: make a variation on Card whose value range is /
-# continuous; i.e., K + 1 == A and A - 1 == K
+
+# Variation on Value that can be used in a game where the card
+# values are continuous -- an Ace can be put on a King
+class ValueContinuous(Value):
+
+    def __add__(self, value):
+        remainder = value % len(self.value_range)
+        return super().__add__(remainder)
+
+    def __sub__(self, value):
+        remainder = value % len(self.value_range)
+        return super().__sub__(remainder)
+
 class Card:
 
     def __init__(self, color, suit, value, image="", hidden=True, location=None):
@@ -74,7 +84,7 @@ class Card:
 
 class Deck:
 
-    def __init__(self):
+    def __init__(self, continuous=False):
         self.cards = []
         for s in ["Diamonds", "Spades", "Hearts", "Clubs"]:
             for v in ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']:
@@ -82,7 +92,11 @@ class Deck:
                     color = "red"
                 elif s in ["Spades", "Clubs"]:
                     color = "black"
-                self.cards.append(Card(color,s,Value(v)))
+
+                if continuous:
+                    self.cards.append(Card(color,s,ValueContinuous(v)))
+                else: 
+                    self.cards.append(Card(color,s,Value(v)))
 
     def shuffle(self):
         shuffle(self.cards)

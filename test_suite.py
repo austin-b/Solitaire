@@ -36,6 +36,18 @@ class TestValue(unittest.TestCase):
         self.assertFalse(Value('K') == 'k')
         self.assertFalse(self.test_value == Value(7))
 
+class TestValueContinuous(unittest.TestCase):
+
+    def setUp(self):
+        self.test_value = ValueContinuous(5)
+
+    def test_add(self):
+        self.assertEqual(self.test_value+14, ValueContinuous(6))
+        self.assertEqual(self.test_value+34, ValueContinuous('K'))
+
+    def test_subtract(self):
+        self.assertEqual(self.test_value-14, ValueContinuous(4))
+
 class TestCard(unittest.TestCase):
 
     def setUp(self):
