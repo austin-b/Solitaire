@@ -46,18 +46,34 @@ class Card:
         else: raise ValueError("Invalid color: black or red only")
     
     def sanitize_suit(self, suit):
-        if suit.capitalize() == "Diamonds" or suit.capitalize() == "Hearts" or suit.capitalize() == "Spades" or suit.capitalize() == "Clubs":
+        if suit.capitalize() == "Diamonds" or suit.capitalize() == "Hearts" and self.color == "red":
+            return suit.capitalize()
+        elif suit.capitalize() == "Spades" or suit.capitalize() == "Clubs" and self.color == "black":
             return suit.capitalize()
         else: raise ValueError("Suit can only be Diamonds, Hearts, Spades, or Clubs.")
 
     def __repr__(self):
         return "Card(" + self.color + ", " + self.suit + ", " + str(self.value) + ", location: " + str(self.location) + ")"
 
+    def __eq__(self, other):
+        if self.value == other.value and self.suit == other.suit:
+            return True
+        else: return False
+
+    def __lt__(self, other):
+        if self.value < other.value:
+            return True
+        else: return False
+
+    def __gt__(self, other):
+        if self.value > other.value:
+            return True
+        else: return False
+
 class Deck:
 
-    cards = []
-
     def __init__(self):
+        self.cards = []
         for s in ["Diamonds", "Spades", "Hearts", "Clubs"]:
             for v in ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']:
                 if s in ["Diamonds", "Hearts"]:
