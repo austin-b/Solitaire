@@ -105,7 +105,7 @@ class Deck:
         return self.cards.pop(0)
 
 if __name__ == '__main__':                
-    from test_suite import TestValue, TestCard, TestDeck
+    from test_suite import TestValue, TestValueContinuous, TestCard, TestDeck
     import unittest
 
     unittest.main(verbosity=3)
